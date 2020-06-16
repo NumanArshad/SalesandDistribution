@@ -1,3 +1,3 @@
-const ROOT_URL = 'http://localhost:5000';
+const ROOT_URL = 'https://localhost:44377';
 
 export default ROOT_URL;
