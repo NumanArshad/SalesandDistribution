@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SalesandDistrib_Backend.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SalesandDistrib_Backend.Models;
 
 namespace SalesandDistrib_Backend.Controllers
 {
@@ -21,24 +19,28 @@ namespace SalesandDistrib_Backend.Controllers
         }
 
         // GET: api/Customer
-  //      [HttpPost]
-//        public ActionResult<UsersView> GetUsers([FromBody] int  SaleAgentId)
-//        {
-//            // return _context.Users;
-//            var data = (from u in _context.Users
-//                        join user_Role in _context.UserRoles on u.Id equals user_Role.UserId
-//                        join
-//roles in _context.Roles on user_Role.RoleId equals roles.Id where roles.Name == "Customer" join agent_customer in _context.AgentCustomer 
-//                        on u.Id equals agent_customer.UserId where agent_customer.SaleAgentId== SaleAgentId
-//                        select new { User = u, UserRole = roles }).ToList();
-                        
+        [HttpGet("{saleAgentId}")]
+        [Route("GetAgentCustomer")]
+        public ActionResult<UsersView> GetUsers([FromRoute] int saleAgentId)
+        {
+            // return _context.Users;
+            var data = (from u in _context.Users
+                        join user_Role in _context.UserRoles on u.Id equals user_Role.UserId
+                        join
+roles in _context.Roles on user_Role.RoleId equals roles.Id
 
-//            return Ok(new
-//            {
-//                UserStatus = "GetSuccess",
-//                usersList = data
-//            });
-//        }
+                        join agent_customer in _context.AgentCustomer
+on u.Id equals agent_customer.CustomerId
+                        where agent_customer.SaleAgentId == saleAgentId
+                        select new { User = u, UserRole = roles }).ToList();
+
+
+            return Ok(new
+            {
+                UserStatus = "GetSuccess",
+                usersList = data
+            });
+        }
 
         // GET: api/Customer/5
         //[HttpGet("{id}")]

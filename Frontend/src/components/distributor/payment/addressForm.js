@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -6,12 +6,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 export default function AddressForm(props) {
-	const [disDetail,setDetail]=useState({FirstName:'',LastName:'',
-Email:'',Contact:'',Address:'',PostalCode:0,Country:'',Province:'',Store:'',City:''})
-useEffect(() => {
-		
-alert("me called")
-  });
+	const [disDetail, setDetail] = useState({
+		FirstName: '', LastName: '',
+		Email: '', Contact: '', Address: '', PostalCode: 0, Country: '', Province: '', Store: '', City: ''
+	})
+	useEffect(() => {
+
+		//alert("me called")
+	});
 	return (
 		<React.Fragment>
 			<Typography variant="h6" gutterBottom>
@@ -26,7 +28,7 @@ alert("me called")
 						label="First name"
 						fullWidth
 						autoComplete="fname"
-						onChange={(event)=>setDetail({...disDetail,FirstName:event.target.value})}
+						onChange={(event) => setDetail({ ...disDetail, FirstName: event.target.value })}
 					/>
 				</Grid>
 				<Grid item xs={12} sm={6}>
@@ -37,7 +39,7 @@ alert("me called")
 						label="Last name"
 						fullWidth
 						autoComplete="lname"
-						onChange={(event)=>setDetail({...disDetail,LastName:event.target.value})}
+						onChange={(event) => setDetail({ ...disDetail, LastName: event.target.value })}
 					/>
 				</Grid>
 				<Grid item xs={12} sm={6}>
@@ -48,7 +50,7 @@ alert("me called")
 						label="Enter  Email"
 						fullWidth
 						autoComplete="email"
-						onChange={(event)=>setDetail({...disDetail,Email:event.target.value})}
+						onChange={(event) => setDetail({ ...disDetail, Email: event.target.value })}
 					/>
 				</Grid>
 				<Grid item xs={12} sm={6}>
@@ -59,7 +61,7 @@ alert("me called")
 						label="contact"
 						fullWidth
 						autoComplete="contact"
-						onChange={(event)=>setDetail({...disDetail,Contact:event.target.value})}
+						onChange={(event) => setDetail({ ...disDetail, Contact: event.target.value })}
 					/>
 				</Grid>
 				<Grid item xs={12}>
@@ -69,7 +71,7 @@ alert("me called")
 						label="Address line "
 						fullWidth
 						autoComplete="billing address-line"
-						onChange={(event)=>setDetail({...disDetail,Address:event.target.value})}
+						onChange={(event) => setDetail({ ...disDetail, Address: event.target.value })}
 					/>
 				</Grid>
 				<Grid item xs={12} sm={6}>
@@ -80,7 +82,7 @@ alert("me called")
 						label="City"
 						fullWidth
 						autoComplete="billing address-level2"
-						onChange={(event)=>setDetail({...disDetail,City:event.target.value})}
+						onChange={(event) => setDetail({ ...disDetail, City: event.target.value })}
 					/>
 				</Grid>
 				<Grid item xs={12} sm={6}>
@@ -94,10 +96,10 @@ alert("me called")
 						label="Zip / Postal code"
 						fullWidth
 						autoComplete="billing postal-code"
-						onChange={(event)=>setDetail({...disDetail,PostalCode:event.target.value})}
+						onChange={(event) => setDetail({ ...disDetail, PostalCode: event.target.value })}
 					/>
 				</Grid>
-			
+
 				<Grid item xs={12} sm={4}>
 					<TextField
 						required
@@ -106,7 +108,7 @@ alert("me called")
 						label="Country"
 						fullWidth
 						autoComplete="billing country"
-						onChange={(event)=>setDetail({...disDetail,Country:event.target.value})}
+						onChange={(event) => setDetail({ ...disDetail, Country: event.target.value })}
 					/>
 				</Grid>
 				<Grid item xs={12} sm={4}>
@@ -117,7 +119,7 @@ alert("me called")
 						label="storeName"
 						fullWidth
 						autoComplete="storeName"
-						onChange={(event)=>setDetail({...disDetail,Store:event.target.value})}
+						onChange={(event) => setDetail({ ...disDetail, Store: event.target.value })}
 					/>
 				</Grid>
 				<Grid item xs={12}>

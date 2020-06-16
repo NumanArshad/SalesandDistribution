@@ -41,13 +41,13 @@ class RolesView extends React.Component {
                     specificrolePrivilegeList={[]}//{this.props.specificrolePrivilegeList}
                     userId={this.props.match.params.userId} GetRolePrivileges={this.props.GetRolePrivileges} />
             case Users_Status.SHOWROLE:
-                alert("show role component" + this.props.rolePrivilegesList.length)
+                //  alert("show role component" + this.props.rolePrivilegesList.length)
                 return <ShowRole createRole={this.props.createRole} rolePrivilegesList={this.props.rolePrivilegesList}
                     GetPrivilegesofSpecificRole={this.props.GetPrivilegesofSpecificRole}
                     userId={this.props.match.params.userId} />
 
             case Users_Status.GETPRIVILEGE_OF_SPECIFICROLE:
-                alert(this.props.specificrolePrivilegeList.length + "hahah")
+                // alert(this.props.specificrolePrivilegeList.length + "hahah")
                 return <CreateRole showRole={this.props.showRole}
                     updatePrivilegesofSpecificRole={this.props.updatePrivilegesofSpecificRole}
                     specificrolePrivilegeList={this.props.specificrolePrivilegeList}

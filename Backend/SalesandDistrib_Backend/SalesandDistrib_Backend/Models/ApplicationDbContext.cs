@@ -26,9 +26,13 @@ namespace SalesandDistrib_Backend.Models
         public DbSet<Inventory> Inventory { get; set; }
         public DbSet<OrderProducts> OrderProducts { get; set; }
         
-        public DbSet<OrderStatus> OrderStatus { get; set; }
-        public DbSet<Status> Status { get; set; }
+        public DbSet<AgentOrderStatus> AgentOrderStatus { get; set; }
+        public DbSet<OrderStatusType> OrderStatusType { get; set; }
+        public DbSet<TargetStatusType> TargetStatusType { get; set; }
         public DbSet<AgentCustomer> AgentCustomer { get; set; }
+       public DbSet<CustomerOrderPayment> CustomerOrderPayment { get; set; }
+       public DbSet<ShopVisitedClaimTypes> ShopVisitedClaimTypes { get; set; }
+        public DbSet<AgentCustomersVisitedClaims> AgentCustomersVisitedClaims { get; set; }
 
 
     }

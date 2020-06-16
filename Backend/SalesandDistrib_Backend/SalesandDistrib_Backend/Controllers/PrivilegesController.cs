@@ -237,6 +237,7 @@ on Role.Id equals rolePrivilege.RoleId
 
                 role.Name = rolePrivileges.RoleName;
                 _context.Roles.Add(role);
+                _context.SaveChanges();
             }
             else if (roleExist)
             {
@@ -251,8 +252,9 @@ on Role.Id equals rolePrivilege.RoleId
                 selectedPrivilege.RoleId = role.Id;
                 selectedPrivilege.PrivilgeId = getPrivilegesId(rolePrivileges.selectedPrivileges[i]);
                 _context.RolePrivileges.Add(selectedPrivilege);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+           
             var dataList = (from Role in _context.Roles
                             join rolePrivilege in _context.RolePrivileges
 on Role.Id equals rolePrivilege.RoleId

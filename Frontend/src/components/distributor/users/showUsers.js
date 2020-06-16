@@ -101,11 +101,11 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
+          {/* <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'Select all desserts' }}
+            inputProps={{ 'aria-label': 'Select all desserts' }} */}
           />
         </TableCell>
         {headRows.map(row => (
@@ -187,7 +187,7 @@ const EnhancedTableToolbar = props => {
         )}
       </div>
       <div className={classes.spacer} />
-      <div className={classes.actions}>
+      {/* <div className={classes.actions}>
         {numSelected > 0 ? (
           
           <Tooltip title="Delete">
@@ -202,7 +202,7 @@ const EnhancedTableToolbar = props => {
             </IconButton>
           </Tooltip>
         )}
-      </div>
+      </div> */}
     </Toolbar>
   );
 };
@@ -329,10 +329,10 @@ const useStyles = makeStyles(theme => ({
                     >
                       <TableCell padding="checkbox" onClick={event => handleClick(event, row.name)}>
                       
-                        <Checkbox
+                        {/* <Checkbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
-                        />
+                        /> */}
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.user.firstName} {row.user.lastName}

@@ -1,6 +1,6 @@
 export const  Inventory_Action = {
     NEW:"NEW",
-    SHOW:"SHOW_Products",
+    SHOW:"SHOW_Inventory",
     LOADNEW:"LOAD_NEW",
     DELETE:'DELETE',
     LOADSHOW:"LOAD_SHOW",
@@ -12,7 +12,7 @@ export const  Inventory_Action = {
 
 export const  Inventory_Status = {
     NEW:"NEW",
-    SHOW:"SHOW_Products",
+    SHOW:"SHOW_Inventory",
     SUCCESS:"SUCCESS",
     DELETE:'DELETE',
     LOADSHOW:"LOAD_SHOW",

@@ -15,7 +15,7 @@ namespace SalesandDistrib_Backend.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
+                .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -23,11 +23,14 @@ namespace SalesandDistrib_Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("SaleAgentId");
+                    b.Property<int>("SaleAgentId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -38,15 +41,82 @@ namespace SalesandDistrib_Backend.Migrations
                     b.ToTable("AgentCustomer");
                 });
 
+            modelBuilder.Entity("SalesandDistrib_Backend.Models.AgentCustomersVisitedClaims", b =>
+                {
+                    b.Property<int>("AgentOrderStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClaimDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VisitedClaimTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AgentOrderStatusId");
+
+                    b.HasIndex("VisitedClaimTypeId");
+
+                    b.ToTable("AgentCustomersVisitedClaims");
+                });
+
+            modelBuilder.Entity("SalesandDistrib_Backend.Models.AgentOrderStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AgentCustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AgentTargetStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgentCustomerId");
+
+                    b.HasIndex("AgentTargetStatusId");
+
+                    b.HasIndex("OrderStatusId");
+
+                    b.ToTable("AgentOrderStatus");
+                });
+
+            modelBuilder.Entity("SalesandDistrib_Backend.Models.CustomerOrderPayment", b =>
+                {
+                    b.Property<int>("AgentOrderStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AmountPaid")
+                        .HasColumnType("int");
+
+                    b.HasKey("AgentOrderStatusId");
+
+                    b.ToTable("CustomerOrderPayment");
+                });
+
             modelBuilder.Entity("SalesandDistrib_Backend.Models.DistributorAgents", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DistributorId");
+                    b.Property<int>("DistributorId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -61,17 +131,23 @@ namespace SalesandDistrib_Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Country");
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DistributorId");
+                    b.Property<int>("DistributorId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("PostalCode");
+                    b.Property<int>("PostalCode")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Province");
+                    b.Property<string>("Province")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -84,13 +160,17 @@ namespace SalesandDistrib_Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Price");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("TotalPacket_Cartoon");
+                    b.Property<int>("TotalPacket_Cartoon")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -103,57 +183,66 @@ namespace SalesandDistrib_Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AgentCustomerId");
+                    b.Property<int>("AgentOrderStatusId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("OrderDate");
+                    b.Property<int>("InventoryId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductId");
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("QTY");
+                    b.Property<int>("QTY")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AgentCustomerId");
+                    b.HasIndex("AgentOrderStatusId");
+
+                    b.HasIndex("InventoryId");
 
                     b.ToTable("OrderProducts");
                 });
 
-            modelBuilder.Entity("SalesandDistrib_Backend.Models.OrderStatus", b =>
+            modelBuilder.Entity("SalesandDistrib_Backend.Models.OrderStatusType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AgentCustomerId");
-
-                    b.Property<int>("StatusId");
+                    b.Property<string>("OrderStatus")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AgentCustomerId");
-
-                    b.HasIndex("StatusId");
-
-                    b.ToTable("OrderStatus");
+                    b.ToTable("OrderStatusType");
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.Packages", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Bandwidth");
+                    b.Property<int>("Bandwidth")
+                        .HasColumnType("int");
 
-                    b.Property<int>("DurationPerMonth");
+                    b.Property<int>("DurationPerMonth")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
-                    b.Property<int>("TotalUsers");
+                    b.Property<int>("TotalUsers")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -164,9 +253,11 @@ namespace SalesandDistrib_Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -177,23 +268,35 @@ namespace SalesandDistrib_Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Category");
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Company");
+                    b.Property<string>("Company")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DistributorId");
+                    b.Property<int>("DistributorId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("ExpiryDate");
+                    b.Property<DateTime?>("ExpiryDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
-                    b.Property<int>("PrimaryUnit");
+                    b.Property<int>("PrimaryUnit")
+                        .HasColumnType("int");
 
-                    b.Property<int>("SecondaryUnit");
+                    b.Property<int>("SecondaryUnit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("imageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -206,9 +309,11 @@ namespace SalesandDistrib_Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -219,11 +324,14 @@ namespace SalesandDistrib_Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DistributorId");
+                    b.Property<int>("DistributorId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("PackageId");
+                    b.Property<int>("PackageId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -238,13 +346,17 @@ namespace SalesandDistrib_Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DistributorId");
+                    b.Property<int>("DistributorId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("PrivilgeId");
+                    b.Property<int>("PrivilgeId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("RoleId");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -257,28 +369,33 @@ namespace SalesandDistrib_Backend.Migrations
                     b.ToTable("RolePrivileges");
                 });
 
-            modelBuilder.Entity("SalesandDistrib_Backend.Models.Status", b =>
+            modelBuilder.Entity("SalesandDistrib_Backend.Models.ShopVisitedClaimTypes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("OrderStatus");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Status");
+                    b.ToTable("ShopVisitedClaimTypes");
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.Store", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -287,15 +404,33 @@ namespace SalesandDistrib_Backend.Migrations
                     b.ToTable("Store");
                 });
 
+            modelBuilder.Entity("SalesandDistrib_Backend.Models.TargetStatusType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TargetStatusType");
+                });
+
             modelBuilder.Entity("SalesandDistrib_Backend.Models.UserRoles", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("RoleId");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -310,19 +445,26 @@ namespace SalesandDistrib_Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address");
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Contact");
+                    b.Property<string>("Contact")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -331,15 +473,62 @@ namespace SalesandDistrib_Backend.Migrations
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.AgentCustomer", b =>
                 {
-                    b.HasOne("SalesandDistrib_Backend.Models.Users", "_customer")
+                    b.HasOne("SalesandDistrib_Backend.Models.Users", "customerObject")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("SalesandDistrib_Backend.Models.Users", "_saleagent")
+                    b.HasOne("SalesandDistrib_Backend.Models.Users", "saleagentObject")
                         .WithMany()
                         .HasForeignKey("SaleAgentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SalesandDistrib_Backend.Models.AgentCustomersVisitedClaims", b =>
+                {
+                    b.HasOne("SalesandDistrib_Backend.Models.AgentOrderStatus", "agentOrderStatus")
+                        .WithMany()
+                        .HasForeignKey("AgentOrderStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SalesandDistrib_Backend.Models.ShopVisitedClaimTypes", "shopVisitedClaimTypes")
+                        .WithMany()
+                        .HasForeignKey("VisitedClaimTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SalesandDistrib_Backend.Models.AgentOrderStatus", b =>
+                {
+                    b.HasOne("SalesandDistrib_Backend.Models.AgentCustomer", "_agentcustomer")
+                        .WithMany()
+                        .HasForeignKey("AgentCustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SalesandDistrib_Backend.Models.TargetStatusType", "_targetStatusType")
+                        .WithMany()
+                        .HasForeignKey("AgentTargetStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SalesandDistrib_Backend.Models.OrderStatusType", "_orderstatustype")
+                        .WithMany()
+                        .HasForeignKey("OrderStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SalesandDistrib_Backend.Models.CustomerOrderPayment", b =>
+                {
+                    b.HasOne("SalesandDistrib_Backend.Models.AgentOrderStatus", "_AgentOrderStatus")
+                        .WithMany()
+                        .HasForeignKey("AgentOrderStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.DistributorAgents", b =>
@@ -347,12 +536,14 @@ namespace SalesandDistrib_Backend.Migrations
                     b.HasOne("SalesandDistrib_Backend.Models.Users", "_distributor")
                         .WithMany()
                         .HasForeignKey("DistributorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SalesandDistrib_Backend.Models.Users", "_user")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.DistributorInfo", b =>
@@ -360,7 +551,8 @@ namespace SalesandDistrib_Backend.Migrations
                     b.HasOne("SalesandDistrib_Backend.Models.Users", "_distributor")
                         .WithMany()
                         .HasForeignKey("DistributorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.Inventory", b =>
@@ -368,28 +560,23 @@ namespace SalesandDistrib_Backend.Migrations
                     b.HasOne("SalesandDistrib_Backend.Models.Products", "_products")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.OrderProducts", b =>
                 {
-                    b.HasOne("SalesandDistrib_Backend.Models.AgentCustomer", "_agentcustomer")
+                    b.HasOne("SalesandDistrib_Backend.Models.AgentOrderStatus", "_agentorderstatus")
                         .WithMany()
-                        .HasForeignKey("AgentCustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+                        .HasForeignKey("AgentOrderStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("SalesandDistrib_Backend.Models.OrderStatus", b =>
-                {
-                    b.HasOne("SalesandDistrib_Backend.Models.AgentCustomer", "_agentcustomer")
+                    b.HasOne("SalesandDistrib_Backend.Models.Inventory", "_inventory")
                         .WithMany()
-                        .HasForeignKey("AgentCustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SalesandDistrib_Backend.Models.Status", "_status")
-                        .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("InventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.Products", b =>
@@ -397,7 +584,8 @@ namespace SalesandDistrib_Backend.Migrations
                     b.HasOne("SalesandDistrib_Backend.Models.Users", "_distributorId")
                         .WithMany()
                         .HasForeignKey("DistributorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.SelectedPackages", b =>
@@ -405,12 +593,14 @@ namespace SalesandDistrib_Backend.Migrations
                     b.HasOne("SalesandDistrib_Backend.Models.Users", "_distributor")
                         .WithMany()
                         .HasForeignKey("DistributorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SalesandDistrib_Backend.Models.Packages", "_packages")
                         .WithMany()
                         .HasForeignKey("PackageId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.SelectedPrivileges", b =>
@@ -418,17 +608,20 @@ namespace SalesandDistrib_Backend.Migrations
                     b.HasOne("SalesandDistrib_Backend.Models.Users", "_distributor")
                         .WithMany()
                         .HasForeignKey("DistributorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SalesandDistrib_Backend.Models.Privileges", "_privilge")
                         .WithMany()
                         .HasForeignKey("PrivilgeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SalesandDistrib_Backend.Models.Roles", "_role")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.Store", b =>
@@ -436,7 +629,8 @@ namespace SalesandDistrib_Backend.Migrations
                     b.HasOne("SalesandDistrib_Backend.Models.Users", "_user")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SalesandDistrib_Backend.Models.UserRoles", b =>
@@ -444,12 +638,14 @@ namespace SalesandDistrib_Backend.Migrations
                     b.HasOne("SalesandDistrib_Backend.Models.Roles", "_role")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SalesandDistrib_Backend.Models.Users", "_user")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

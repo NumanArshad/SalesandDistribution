@@ -24,7 +24,6 @@ import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 
 import {withRouter} from 'react-router-dom'
-import {Users_Action,Users_Status} from '../../../constants/usersActions'
 function createData(name, calories, fat, carbs, protein,icon) {
   return { name, calories, fat, carbs, protein,icon };
 }
@@ -82,13 +81,13 @@ function getSorting(order, orderBy) {
 }
 
 const headRows = [
-  { label: ' Name', numeric: false, disablePadding: true, id: 'Numan' },
+  { label: ' Product Name', numeric: false, disablePadding: true, id: 'Numan' },
   //  { label: 'Last Name', numeric: true, disablePadding: false, id: 'Arshad' },
-  { label: 'Email', numeric: true, disablePadding: false, id: 'numanuet311@gmail.com' },
-  { label: 'Contact', numeric: true, disablePadding: false, id: '03086415241' },
-  { label: 'Role', numeric: true, disablePadding: false, id: 'Sales Agent' },
-  { label: 'Address', numeric: true, disablePadding: false, id: 'Uet lahore' },
-  { label: 'Action', numeric: true, disablePadding: false, id: 'Uet lahore' }
+  { label: 'Category', numeric: false, disablePadding: false, id: 'numanuet311@gmail.com' },
+  { label: 'Company', numeric: true, disablePadding: false, id: '03086415241' },
+  { label: 'UnitPrice', numeric: true, disablePadding: false, id: 'Sales Agent' },
+  { label: 'TotalPacket_Cartoon', numeric: true, disablePadding: false, id: 'Uet lahore' },
+  { label: 'Carton Price', numeric: true, disablePadding: false, id: 'Uet lahore' }
 ];
 
 function EnhancedTableHead(props) {
@@ -101,12 +100,12 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
+          {/* <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ 'aria-label': 'Select all desserts' }}
-          />
+          /> */}
         </TableCell>
         {headRows.map(row => (
           <TableCell
@@ -187,7 +186,7 @@ const EnhancedTableToolbar = props => {
         )}
       </div>
       <div className={classes.spacer} />
-      <div className={classes.actions}>
+      {/* <div className={classes.actions}>
         {numSelected > 0 ? (
           
           <Tooltip title="Delete">
@@ -202,7 +201,7 @@ const EnhancedTableToolbar = props => {
             </IconButton>
           </Tooltip>
         )}
-      </div>
+      </div> */}
     </Toolbar>
   );
 };
@@ -228,7 +227,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
- function ShowInventory(props) {
+ function ShowInventories(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -287,7 +286,7 @@ const useStyles = makeStyles(theme => ({
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.usersList.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.inventorylist.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
@@ -308,10 +307,10 @@ const useStyles = makeStyles(theme => ({
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={props.usersList.length}
+              rowCount={props.inventorylist.length}
             />
             <TableBody>
-              {stableSort(props.usersList, getSorting(order, orderBy))  //rows
+              {stableSort(props.inventorylist, getSorting(order, orderBy))  //rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -324,32 +323,35 @@ const useStyles = makeStyles(theme => ({
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.inventory._products.name}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox" onClick={event => handleClick(event, row.name)}>
                       
-                        <Checkbox
+                        {/* <Checkbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
-                        />
+                        /> */}
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.user.firstName} {row.user.lastName}
+                        {row.inventory._products.name}
                       </TableCell>
-                      <TableCell align="right">{row.user.email}</TableCell>
-                      <TableCell align="right">{row.user.contact}</TableCell>
-                      <TableCell align="right">{row.user_Role.name}</TableCell>
-                      <TableCell align="right">{row.user.address}</TableCell>
+                      <TableCell align="right">{row.inventory._products.category}</TableCell>
+                      <TableCell align="right">{row.inventory._products.company}</TableCell>
+                      <TableCell align="right">{row.inventory._products.price}</TableCell>
+                      <TableCell align="right">{row.inventory.totalPacket_Cartoon}</TableCell>
+                      <TableCell align="right">{row.inventory.price}</TableCell>
                       <TableCell align="right" onClick={
       ()=>{
         //props.createUser()//;props.history.push('/distributor/snd/users/User')
       }
     }>
-    <div><EditIcon  onClick={()=>props.GetUsertoRolebyId(row.user.id)}
-    style={{cursor:'pointer'}}/><DeleteIcon 
-    onClick={()=>props.DeleteUsertoRole(row.user.id,props.DistId)}
-    style={{marginLeft:10,cursor:'pointer'}} /></div>
+    <div><EditIcon  onClick={()=>props.fetchInventorybyId(row.inventory.id)}
+    style={{cursor:'pointer'}}/>
+    <DeleteIcon 
+    onClick={()=>props.deleteInventory(row.inventory.id, props.distId)}
+    style={{marginLeft:10,cursor:'pointer'}} />
+    </div>
     </TableCell>
                     </TableRow>
                   );
@@ -365,7 +367,7 @@ const useStyles = makeStyles(theme => ({
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={props.usersList.length} //rows
+          count={props.inventorylist.length} //rows
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
@@ -386,4 +388,4 @@ const useStyles = makeStyles(theme => ({
     </div>
   );
 }
-export default withRouter(ShowInventory)
+export default withRouter(ShowInventories)

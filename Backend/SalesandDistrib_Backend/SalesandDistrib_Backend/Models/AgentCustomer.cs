@@ -11,11 +11,11 @@ namespace SalesandDistrib_Backend.Models
     {
         [Key]
         public int Id { get; set; }
-        public Users _saleagent { get; set; }
-       [ForeignKey("_saleagent")]
+        public Users saleagentObject { get; set; }
+       [ForeignKey("saleagentObject")]
         public int SaleAgentId { get; set; }
-        public Users _customer { get; set; }
-          [ForeignKey("_customer")]
+        public Users customerObject { get; set; }
+          [ForeignKey("customerObject")]
         public int CustomerId { get; set; }
     }
 }

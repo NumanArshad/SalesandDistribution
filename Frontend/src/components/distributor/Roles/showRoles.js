@@ -101,12 +101,12 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
+          {/* <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ 'aria-label': 'Select all desserts' }}
-          />
+          /> */}
         </TableCell>
         {headRows.map(row => (
           <TableCell
@@ -321,19 +321,19 @@ const useStyles = makeStyles(theme => ({
                     <TableRow
                       hover
                       
-                      role="checkbox"
-                      aria-checked={isItemSelected}
+                     role="checkbox"
+                     aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.name}
-                      selected={isItemSelected}
+                     // selected={isItemSelected}
                     >
                       <TableCell padding="checkbox" onClick={event => handleClick(event, row.name)}>
-                      
+                       {/*
                         <Checkbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
-                        />
-                      </TableCell>
+                        />*/}
+                      </TableCell> 
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.role.name}
                       </TableCell>

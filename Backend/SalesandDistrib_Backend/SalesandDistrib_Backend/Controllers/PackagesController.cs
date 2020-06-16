@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 using SalesandDistrib_Backend.Models;
 
 namespace SalesandDistrib_Backend.Controllers
 {
     [Route("api/[controller]")]
-    [EnableCors("AllowMyOrigin")]
+  //  [EnableCors("AllowMyOrigin")]
     [ApiController]
     public class PackagesController : ControllerBase
     {
@@ -26,7 +27,12 @@ namespace SalesandDistrib_Backend.Controllers
         [HttpGet]
         public ActionResult<Packages> GetPackages()
         {
-            return Ok(new { PackageStatus = "GetAll", AllPackages = _context.Packages });  ///get as packageStatus
+            String token = null;
+            if (Request.Headers.TryGetValue("Authorization", out StringValues authToken))
+            {
+                token = authToken;
+            }
+            return Ok(new { PackageStatus = "GetAll", AllPackages = _context.Packages,Token=token });  ///get as packageStatus
         }
 
         // GET: api/Packages/5
@@ -38,15 +44,16 @@ namespace SalesandDistrib_Backend.Controllers
                 return BadRequest(ModelState);
 
             }
+           
 
-            var packages = await _context.Packages.FindAsync(id);
+                var packages = await _context.Packages.FindAsync(id);
 
             if (packages == null)
             {
                 return Ok(new { PackageStatus = "NotFound" });
             }
 
-            return Ok(new { PackageStatus = "GetSpecific", packages = packages });
+            return Ok(new { PackageStatus = "GetSpecific", packages = packages});
         }
 
         // PUT: api/Packages/5

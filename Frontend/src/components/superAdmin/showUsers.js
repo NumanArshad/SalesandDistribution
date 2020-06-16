@@ -241,7 +241,7 @@ const [distributorList,setList]=React.useState([])
 
   useEffect(() => {
 		alert("effect called")
-    fetch('https://localhost:44377/api/Users/GetDistributors', {
+    fetch('https://salesanddistribbackend20200126051733.azurewebsites.net/api/Users/GetDistributors', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json;charset=UTF-8'

@@ -105,7 +105,7 @@ class ShowPackageUser extends React.Component {
 	};
 
 	componentDidMount() {
-		fetch('https://localhost:44377/api/Packages', {
+		fetch('https://salesanddistribbackend20200126051733.azurewebsites.net/api/Packages', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json;charset=UTF-8'

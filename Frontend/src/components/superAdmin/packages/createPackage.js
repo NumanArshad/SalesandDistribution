@@ -1,35 +1,3 @@
-// import React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
-// import Typography from '@material-ui/core/Typography';
-// import PackagesForm from './packageObjsForm'
-// import Button from '@material-ui/core/Button';
-// import Dashboard from '../dashboard/dashboard'
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     padding: theme.spacing(3, 2),
-//     marginTop:-40
-//   },
-// }));
-
-// export default function CreatePackage(props) {
-//   const classes = useStyles();
-
-//   return (
-//     <div>
-//       <Dashboard />
-//       <div style={{margin:10}}>
-//          <Button variant="contained" color="primary" style={{paddingTop:20,paddingBottom:20,marginLeft:20,cursor:'default'}}>Create Package</Button>
-//       <Paper className={classes.root}>
-
-     
-//         <PackagesForm showPackage={props.showPackage} />
-//       </Paper>
-//       </div>
-//     </div>
-//   );
-// }
-
 import React,{useState,useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';

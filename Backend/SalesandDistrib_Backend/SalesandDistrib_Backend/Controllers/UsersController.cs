@@ -164,10 +164,10 @@ distributor_Agents in _context.DistributorAgents on u.Id equals distributor_Agen
             {
                 return BadRequest(ModelState);
             }
-          //  int userId = _context.Users.Max(obj => obj.Id) + 1;
-            int roleId= _context.Roles.Max(obj => obj.Id) + 1;
+            //  int userId = _context.Users.Max(obj => obj.Id) + 1;
+            //    int roleId= _context.Roles.Max(obj => obj.Id) + 1;
             Users users = new Users();
-            
+
             users.FirstName = userView.FirstName;
             users.LastName = userView.LastName;
             users.Email = userView.Email;
@@ -176,23 +176,32 @@ distributor_Agents in _context.DistributorAgents on u.Id equals distributor_Agen
             users.Password = "Numan311@";
             _context.Users.Add(users);
 
-           
-            Roles adminRole = new Roles();
-            adminRole.Name = userView.RoleName;
-            _context.Roles.Add(adminRole);
 
-            //  Roles role = _context.Roles.Where(obj => obj.Name == userView.RoleName).FirstOrDefault();
+            //Roles adminRole = new Roles();
+            //adminRole.Name = userView.RoleName;
+            //_context.Roles.Add(adminRole);
+
+            int roleId = _context.Roles.Where(obj => obj.Name == userView.RoleName).FirstOrDefault().Id;
             await _context.SaveChangesAsync();
             UserRoles userRole = new UserRoles();
             userRole.UserId = users.Id;
-            userRole.RoleId = adminRole.Id;
+            userRole.RoleId = roleId;
             _context.UserRoles.Add(userRole);
 
+            List<string> saleAgentPossibleList = new List<string>()
+            {
+                "sale agent","saleagent",
+            };
 
+            //if (saleAgentPossibleList.Contains(userView.RoleName.ToLower()))
+            //{
             DistributorAgents distributorAgents = new DistributorAgents();
             distributorAgents.DistributorId = userView.DistId;
             distributorAgents.UserId = users.Id;
             _context.DistributorAgents.Add(distributorAgents);
+
+        //}
+           
             // await
             await _context.SaveChangesAsync();
 
@@ -403,6 +412,21 @@ role.Id equals rolePrivilge.RoleId
             if (isExist)
             {
                 int UserId = _context.Users.Where(obj => obj.Email == users.Email && obj.Password == users.Password).FirstOrDefault().Id;
+
+                
+                
+                var distAgent = (from u in _context.Users where u.Id==UserId join userRole in _context.UserRoles  on u.Id equals userRole.UserId join role in _context.Roles
+                                   on userRole.RoleId equals role.Id where role.Name == "sale agent" join dist_Agent in _context.DistributorAgents 
+                               on  u.Id equals dist_Agent.UserId select new { distId = dist_Agent.DistributorId }).ToList();
+                if (distAgent.Count != 0)
+                {
+                    return Ok(new
+                    {
+                        signInStatus = "Authorized",
+                        userId = UserId,
+                        DistId = distAgent[0].distId,
+                     });
+                }
                 return Ok(new
                 {
                     signInStatus = "Authorized",
@@ -410,6 +434,8 @@ role.Id equals rolePrivilge.RoleId
                     token = new JwtSecurityTokenHandler().WriteToken(token)
 
                 });
+
+
             }
             return Ok(new { signInStatus = "Not_Authorized" });
         }

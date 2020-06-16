@@ -7,8 +7,11 @@ namespace SalesandDistrib_Backend.Models
 {
     public class ProductInventoryView
     {
-        public Products products { get; set; }
-        public Inventory inventory { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public int TotalCarton { get; set; }
+        public int PriceperCarton { get; set; }
+        public int DistId { get; set; }
 
     }
 }

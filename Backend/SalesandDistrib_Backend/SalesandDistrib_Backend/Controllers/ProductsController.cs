@@ -93,6 +93,16 @@ namespace SalesandDistrib_Backend.Controllers
             return Ok(new { ProductStatus = "CreatedSuccess", products = _context.Products });  ///get as packageStatus
         }
 
+        [HttpPost]
+        [Route("SpecificDistProd")]  //product of specific distributorId
+        public async Task<ActionResult<Products>> GetDistProducts(Products products)
+        {
+
+            List<Products> listProduct = _context.Products.Where(obj => obj.DistributorId == products.DistributorId).ToList();
+            // return CreatedAtAction("GetProducts", new { id = products.Id }, products);
+            return Ok(new { ProductStatus = "GetAll", products = listProduct });  ///get as packageStatus
+        }
+        
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Products>> DeleteProducts(int id)
@@ -106,7 +116,8 @@ namespace SalesandDistrib_Backend.Controllers
 
             _context.Products.Remove(products);
             await _context.SaveChangesAsync();
-            return Ok(new { ProductStatus = "DeletedSuccess", products = _context.Products });  ///get as packageStatus
+            return Ok(new { ProductStatus = "DeletedSuccess",
+                AllProducts = _context.Products});  ///get as packageStatus
            // return products;
         }
 

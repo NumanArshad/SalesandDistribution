@@ -1,5 +1,5 @@
 export const  Products_Action={
-    NEW:"NEW",
+    NEW:"NEW_PRODUCTS",
     SHOW:"SHOW_Products",
     LOADNEW:"LOAD_NEW",
     DELETE:'DELETE',
@@ -10,7 +10,7 @@ export const  Products_Action={
     UNDERUPDATE:"UNDERUPDATE"
 }
 export const  Products_Status={
-    NEW:"NEW",
+    NEW:"NEW_PRODUCTS",
     SHOW:"SHOW_Products",
     SUCCESS:"SUCCESS",
     DELETE:'DELETE',
