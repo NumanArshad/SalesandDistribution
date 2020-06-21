@@ -10,7 +10,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 const styles = theme =>({
   card: {
-    maxWidth: 345,
+    maxWidth: 345//,
+   // minWidth:150
   },
   media: {
     height: 140,
@@ -22,16 +23,16 @@ class ShowProduct extends Component {
   }
   render() {    
     return (
-      <div style={{marginTop:100}}>
-      {this.props.products.length}
+      <div style={{marginTop:60}}>
+      {/* {this.props.products.length} */}
        {/* <Grid style = {{flexGrow: 1}} container spacing={3}> */}
         {/* <Grid item xs>
           {this.props.products.map((product)=>{
             return  <ProductCard products = {product}/>
           })}
         </Grid>         */}
-        <Grid item xs={12}>
-        <Grid container spacing={2}>        
+        <Grid item xs={12} >
+        <Grid container spacing={3}>        
           {this.props.products.map(product => (
             <Grid key={product.price} item>
               {/* <ProductCard products = {product} deleteProductInCard = {this.props.deleteProduct}/> */}
@@ -39,7 +40,7 @@ class ShowProduct extends Component {
                 <Card className={styles.card}>
                   <CardActionArea>
                     <CardMedia
-                      style={{ height: "300px" }}
+                      style={{ height: "150px" }}
                       className={styles.media}
                       image={product.imageUrl}
                       title="Contemplative Reptile"
@@ -62,9 +63,9 @@ class ShowProduct extends Component {
                     }}>
                       Delete
                     </Button>
-                    <Button size="small" color="primary">
+                    {/* <Button size="small" color="primary">
                       Learn More
-                    </Button>
+                    </Button> */}
                   </CardActions>
                 </Card>    
             </Grid>

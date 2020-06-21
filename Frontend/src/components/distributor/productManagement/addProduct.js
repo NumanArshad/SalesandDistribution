@@ -14,7 +14,9 @@ import { Link,withRouter } from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(7, 7,4,7),
-        marginTop: 85,
+       
+        marginTop:60,
+	//	padding: theme.spacing(2,3,3,3),
         [theme.breakpoints.down('sm')]: {
             padding: theme.spacing(7, 4,4,4),
         },
@@ -35,6 +37,7 @@ const useStyles = makeStyles(theme => ({
     const [showProgress, setshowProgress]=useState(false);
     const [productObj, setProductAttribute] = useState({Name:'', Price:0, Category: '',Company: '', PrimaryUnit:'', ScondaryUnit:'',
     ExpiryDate: null}); 
+    // alert("in add "+props.distId)
     const [imageObj, handleImageChange] = useState({image:null, imageUrl: 'ljge', progress: 0});
     useEffect(() => {
     
@@ -171,7 +174,7 @@ const useStyles = makeStyles(theme => ({
           <Grid container spacing={2} justify='flex-start'>
           <Grid item>
       <Button alignItems="center" variant="contained" color="default"
-      onClick={()=>props.fetchProducts()}>
+      onClick={()=>props.fetchProducts(props.distId)}>
           
               Cancel
           </Button>
@@ -249,13 +252,13 @@ const useStyles = makeStyles(theme => ({
               <Grid container spacing={2} justify='flex-start'>
               <Grid item>
           <Button alignItems="center" variant="contained" color="default"
-          onClick={()=>props.fetchProducts()}>
+          onClick={()=>props.fetchProducts(props.distId)}>
               
                   Cancel
               </Button>
               </Grid>
           <Grid item> 
-          {imageObj.imageUrl} image url
+       
           <Button alignItems="center" variant="contained" color="secondary"
           onClick={()=>props.PostProduct(productObj.Name, productObj.Price, productObj.Category, productObj.Company,
             productObj.PrimaryUnit, productObj.SecondaryUnit, productObj.ExpiryDate,props.distId, imageObj.imageUrl)}>

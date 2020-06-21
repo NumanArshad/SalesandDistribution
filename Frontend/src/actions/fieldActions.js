@@ -5,13 +5,10 @@ export const postAgentCustomer = (distId, custId, saleAgentId, StartDay, EndDay)
 
     //alert("so length is "+JSON.stringify(custId))
     var agentCust = {
-        'distId': parseInt(distId),
-        'customerNameList': custId,
-        'saleAgentName': saleAgentId,
-        'startDate': '2019-02-02',
-        'endDate': '2019-02-02'
+        'distId': parseInt(distId), 'customerNameList': custId, 'saleAgentName': saleAgentId,
+        'startDate': '2019-02-02', 'endDate': '2019-02-02'
     }
-    fetch(ROOT_URL + '/api/AgentCustomers/CreateAgentJourneyPlan', {
+    fetch(ROOT_URL+'/api/AgentCustomers/CreateAgentJourneyPlan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json;charset=UTF-8' },
         mode: 'cors',
@@ -30,9 +27,10 @@ export const postAgentCustomer = (distId, custId, saleAgentId, StartDay, EndDay)
                     specificAgentOfCustomersList: data.distributorAgentCustomerDetailList
                 });
 
-            } else {
+            }
+            else {
                 console.log('Try Again')
-                    //  return dispatch({ type: Payment_Action.FAILED })
+                //  return dispatch({ type: Payment_Action.FAILED })
             }
 
         })
@@ -45,7 +43,7 @@ export const getCustomerOfAgent = (distId) => dispatch => {
         'DistributorId': parseInt(distId)
     }
 
-    fetch(ROOT_URL + '/api/AgentCustomers/GetDistAgentwithCustomer', {
+    fetch(ROOT_URL+'/api/AgentCustomers/GetDistAgentwithCustomer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json;charset=UTF-8' },
         mode: 'cors',
@@ -61,7 +59,8 @@ export const getCustomerOfAgent = (distId) => dispatch => {
                     type: SaleOrder_Action.SHOWAGENTCUST,
                     specificAgentOfCustomersList: data.distributorAgentCustomerDetailList
                 });
-            } else {
+            }
+            else {
                 console.log('Try Again')
             }
         })
@@ -70,7 +69,7 @@ export const getCustomerOfAgent = (distId) => dispatch => {
 
 // Fetch all Agents and Customers
 export const fetchDistributoAgentCustomer = (distId) => dispatch => {
-    const getData = fetch(ROOT_URL + '/api/AgentCustomers/' + distId, {
+    const getData = fetch(ROOT_URL+'/api/AgentCustomers/' + distId, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json;charset=UTF-8' },
         mode: 'cors',

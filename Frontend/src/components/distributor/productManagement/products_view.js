@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 // Map Dispatch to Props
 const mapDispatchToProps = dispatch => {
     return {
-        fetchProducts: () => { dispatch(fetchProducts()) },
+        fetchProducts: (distId) => { dispatch(fetchProducts(distId)) },
         PostProduct: (productName, productPrice, productCategory, productCompany, primaryUnit, scondaryUnit, expiryDate, distId, imageUrl) => {
             dispatch(PostProduct(productName, productPrice, productCategory, productCompany, primaryUnit, scondaryUnit, expiryDate,
                 distId, imageUrl))

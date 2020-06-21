@@ -17,7 +17,7 @@ import Container from '@material-ui/core/Container';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import ROOT_URL from '../../constants/config';
 const useStyles = makeStyles(theme => ({
 	'@global': {
 		body: {
@@ -105,7 +105,7 @@ class ShowPackageUser extends React.Component {
 	};
 
 	componentDidMount() {
-		fetch('https://salesanddistribbackend20200126051733.azurewebsites.net/api/Packages', {
+		fetch(ROOT_URL+'/api/Packages', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json;charset=UTF-8'

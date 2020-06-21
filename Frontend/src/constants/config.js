@@ -1,3 +1,3 @@
-const ROOT_URL = 'https://localhost:44377';
+const ROOT_URL = 'http://sndwebapi.spikotech.com'
 
 export default ROOT_URL;

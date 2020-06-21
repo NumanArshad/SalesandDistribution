@@ -70,7 +70,8 @@ props.specificrolePrivilegeList.map((obj)=>{
 	
 					<Paper className={classes.paperRoot}>
 					{props.specificrolePrivilegeList.length!== 0?
-					<div>{selectedL.length}
+					<div>
+						{/* {selectedL.length} */}
 						 <Grid container spacing={3} direction="column" justify="center">
 			
 						 <Grid item >

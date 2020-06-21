@@ -1,22 +1,7 @@
 import { SignIn_Action } from '../constants/signInActions'
-import ROOT_URL from '../constants/config';
 import { object } from 'prop-types';
+import ROOT_URL from '../constants/config';
 const jwt = require("jsonwebtoken")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const tokenExpires=300
 // const users={
@@ -46,32 +31,33 @@ const jwt = require("jsonwebtoken")
 export const login = (username, password) => dispatch => {
 
 
-    //alert("called success")
-    var user = { 'Email': username, 'Password': password }
+  //alert("called success")
+  var user = { 'Email': username, 'Password': password }
 
-    const postRequest = fetch(ROOT_URL + '/api/Users/Login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json;charset=UTF-8' },
-        mode: 'cors',
-        body: JSON.stringify(user)
-    }).then((response) => {
-        console.log("required" + response.status)
-            //console.log('********'+response.statusText);
-        response.json().then(data => {
-            //alert(data.userId);
-            console.log("data:......" + data.signInStatus)
-            if (data.signInStatus === 'Authorized') {
-                console.log('auth')
-                    // alert('id is' + data.userId);
-                console.log(data.token)
+  const postRequest = fetch(ROOT_URL+'/api/Users/Login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json;charset=UTF-8' },
+    mode: 'cors',
+    body: JSON.stringify(user)
+  }).then((response) => {
+    console.log("required" + response.status)
+    //console.log('********'+response.statusText);
+    response.json().then(data => {
+      //alert(data.userId);
+      console.log("data:......" + data.signInStatus)
+      if (data.signInStatus === 'Authorized') {
+        console.log('auth')
+        // alert('id is' + data.userId);
+        console.log(data.token)
 
-                //  console.log("signing credentials "+Object.keys(data.claims))
-                return dispatch({ type: SignIn_Action.AUTHORIZED, userId: data.userId });
-            } else if (data.signInStatus === 'Not_Authorized') {
-                console.log('not auth')
-                return dispatch({ type: SignIn_Action.NOTAUTHORIZED })
-            }
+        //  console.log("signing credentials "+Object.keys(data.claims))
+        return dispatch({ type: SignIn_Action.AUTHORIZED, userId: data.userId });
+      }
+      else if (data.signInStatus === 'Not_Authorized') {
+        console.log('not auth')
+        return dispatch({ type: SignIn_Action.NOTAUTHORIZED })
+      }
 
-        })
     })
+  })
 }

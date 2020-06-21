@@ -6,7 +6,7 @@ export const getSalesOrders = (DistId) => dispatch => {
         'DistributorId': parseInt(DistId)
     }
 
-    fetch(ROOT_URL + '/api/AgentCustomers/GetDistAgentwithCustomer', {
+    fetch(ROOT_URL+'/api/AgentCustomers/GetDistAgentwithCustomer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json;charset=UTF-8' },
         mode: 'cors',

@@ -20,7 +20,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 import EditIcon from '@material-ui/icons/Edit';
-
+import ROOT_URL from '../../constants/config';
 import {withRouter} from 'react-router-dom'
 
 function createData(name, calories, fat, carbs, protein,icon) {
@@ -240,8 +240,8 @@ const useStyles = makeStyles(theme => ({
 const [distributorList,setList]=React.useState([])
 
   useEffect(() => {
-		alert("effect called")
-    fetch('https://salesanddistribbackend20200126051733.azurewebsites.net/api/Users/GetDistributors', {
+	//	alert("effect called")
+    fetch(ROOT_URL+'/api/Users/GetDistributors', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json;charset=UTF-8'
@@ -255,7 +255,7 @@ const [distributorList,setList]=React.useState([])
 			else {
 				response.json().then(data => {
 					if (data.distributorStatus == 'GetAll') {
-            alert(data.allDistributors.length+"is distributor length")
+        //    alert(data.allDistributors.length+"is distributor length")
             setList(data.allDistributors)
             //	this.setState({ packagesList: data.allPackages })
 					}

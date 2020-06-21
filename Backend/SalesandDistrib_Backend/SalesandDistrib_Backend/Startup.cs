@@ -29,7 +29,7 @@ namespace SalesandDistrib_Backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(
-                 options => options.AddPolicy("AllowMyOrigin", buider => buider.WithOrigins("http://localhost:3000","http://10.5.48.14:3000", "http://10.5.48.49:3000", "https://salesanddistributions.netlify.com").AllowAnyMethod().AllowAnyHeader()
+                 options => options.AddPolicy("AllowMyOrigin", buider => buider.WithOrigins("http://localhost:3000","http://sndapp.spikotech.com").AllowAnyMethod().AllowAnyHeader()
                   ));
 
             services.AddControllers();

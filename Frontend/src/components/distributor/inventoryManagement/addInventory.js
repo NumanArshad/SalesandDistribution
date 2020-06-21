@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useEffect } from 'react'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-
+import ROOT_URL from '../../../constants/config';
 import Grid from '@material-ui/core/Grid';
 
 import Select from '@material-ui/core/Select';
@@ -45,8 +45,8 @@ const useStyles = makeStyles(theme => ({
 	// 	width: 200,
 	// },
 	root: {
-		padding: theme.spacing(7, 7, 4, 7),
-		marginTop: 60,
+		padding: theme.spacing(2, 7, 4, 2),
+		marginTop: 20,
 	}
 }));
 
@@ -79,7 +79,7 @@ export default function AddInventory(props) {
 
 	useEffect(() => {
 		//	alert("call")
-		fetch('https://salesanddistribbackend20200126051733.azurewebsites.net/api/products/'// + props.distId
+		fetch(ROOT_URL+'/api/products/'// + props.distId
 			, {
 				method: 'GET',
 				headers: {

@@ -85,7 +85,7 @@ const mapDipatchToProps = dispatch => ({
 	FetchRolesbyDistributor: (DistributorId) => { dispatch(FetchRolesbyDistributor(DistributorId)) },
 	GetUsertoRole: (DistId) => dispatch(GetUsertoRole(DistId)),
 	//Products
-	fetchProducts: () => { dispatch(fetchProducts()) },
+	fetchProducts: (distId) => { dispatch(fetchProducts(distId)) },
 	PostProduct: () => { dispatch({ type: Products_Action.NEW }) },
 	// inventory
 	fetchInventories: (DistributorId) => { dispatch(fetchInventories(DistributorId)) },

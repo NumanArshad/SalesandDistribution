@@ -6,13 +6,11 @@ import ROOT_URL from '../constants/config';
 export const PostInventory = (Disid, product, TotalPacket_Cartoon, Price) => dispatch => {
     var inventoryData = {
         'DistId': parseInt(Disid),
-        'TotalCarton': parseInt(TotalPacket_Cartoon),
-        'PriceperCarton': parseInt(Price),
-        'Name': product.name,
-        'Category': product.category
+        'TotalCarton': parseInt(TotalPacket_Cartoon), 'PriceperCarton': parseInt(Price),
+        'Name': product.name, 'Category': product.category
     }
 
-    fetch(ROOT_URL + '/api/Inventory', {
+    fetch(ROOT_URL+'/api/Inventory', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json;charset=UTF-8' },
         mode: 'cors',
@@ -22,7 +20,7 @@ export const PostInventory = (Disid, product, TotalPacket_Cartoon, Price) => dis
         response.json().then(data => {
             //alert(JSON.stringify(data));
             return dispatch({ type: Inventory_Action.SHOW, payload: data.inventoryList })
-                //  return dispatch({ type: Inventory_Action.NEW, payload: data.inventoryList})            
+            //  return dispatch({ type: Inventory_Action.NEW, payload: data.inventoryList})            
         })
     })
 }
@@ -32,24 +30,26 @@ export const PostInventory = (Disid, product, TotalPacket_Cartoon, Price) => dis
 
 
 export const fetchInventories = (id) => dispatch => {
-    fetch(ROOT_URL + '/api/Inventory/' + id, {
+    fetch(ROOT_URL+'/api/Inventory/' + id, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
             // Content-Type: application/json
             'Accept': 'application/json'
-                // 'charset': 'UTF-8'
+            // 'charset': 'UTF-8'
         },
         mode: 'cors'
     }).then((response) => {
         console.log(response.status + "response" + "stattus text is" + response.statusText);
         if (response.status === 500) {
             // alert("server error")
-        } else {
+        }
+        else {
             response.json().then(data => {
                 console.log(data.inventoryList);
                 return dispatch({ type: Inventory_Action.SHOW, payload: data.inventoryList })
-            })
+            }
+            )
         }
     }).catch(error => alert(error));
 
@@ -57,7 +57,7 @@ export const fetchInventories = (id) => dispatch => {
 
 export const deleteInventory = (inventId, distId) => dispatch => {
     alert("delete called action" + 'invent id' + inventId)
-    fetch(ROOT_URL + '/api/Inventory/' + inventId + '/' + distId, {
+    fetch(ROOT_URL+'/api/Inventory/' + inventId + '/' + distId, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json;charset=UTF-8'
@@ -67,7 +67,8 @@ export const deleteInventory = (inventId, distId) => dispatch => {
         console.log(response.status + "response" + "stattus text is" + response.statusText);
         if (response.status === 404) {
             //alert("server error")
-        } else {
+        }
+        else {
             response.json().then(data => {
 
                 return dispatch({ type: Inventory_Action.DELETE, payload: data.inventoryList })
@@ -78,7 +79,7 @@ export const deleteInventory = (inventId, distId) => dispatch => {
 
 
 export const fetchInventorybyId = (inventoryId) => dispatch => {
-    const postProd = fetch(ROOT_URL + '/api/inventory/' + inventoryId, {
+    const postProd = fetch(ROOT_URL+'/api/inventory/' + inventoryId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json;charset=UTF-8'
@@ -88,7 +89,8 @@ export const fetchInventorybyId = (inventoryId) => dispatch => {
         console.log(response.status + "response" + "stattus text is" + response.statusText);
         if (response.status === 404) {
             // alert("server error")
-        } else {
+        }
+        else {
             response.json().then(data => {
                 return dispatch({ type: Inventory_Action.UNDERUPDATE, payload: data })
             })
@@ -99,8 +101,7 @@ export const fetchInventorybyId = (inventoryId) => dispatch => {
 export const updateInventory = (inventoryId, TotalPacket_Cartoon, Price) => dispatch => {
     var prodData = {
         'inventoryId': inventoryId,
-        'TotalPacket_Cartoon': TotalPacket_Cartoon,
-        'Price': parseInt(Price),
+        'TotalPacket_Cartoon': TotalPacket_Cartoon, 'Price': parseInt(Price),
     }
 
     const postProd = fetch(ROOT_URL + '/inventory/' + inventoryId, {
